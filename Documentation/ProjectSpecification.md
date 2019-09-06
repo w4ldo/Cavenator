@@ -1,9 +1,3 @@
-Mitä algoritmeja ja tietorakenteita toteutat työssäsi
-Mitä ongelmaa ratkaiset ja miksi valitsit kyseiset algoritmit/tietorakenteet
-Mitä syötteitä ohjelma saa ja miten näitä käytetään
-Tavoitteena olevat aika- ja tilavaativuudet (m.m. O-analyysit)
-Lähteet
-
 ## Cavenator
 
 The goal of this project is to create a cave generating application on Java for roguelike/2d dungeons. The project will implement [cellular automaton](https://en.wikipedia.org/wiki/Cellular_automaton) to generate random cave formation from user controlled seed.
