@@ -1,7 +1,7 @@
 # Cavenator
 Tiralabra2019/1
 
-Cave generator for roguelikes based on cellular automata
+Cave generator for roguelikes based on cellular automata.
 
 ##### [Project specification](https://github.com/w4ldo/Cavenator/blob/master/Documentation/ProjectSpecification.md)
 
