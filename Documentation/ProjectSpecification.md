@@ -6,9 +6,10 @@ The goal of this project is to create a cave generating application on Java for 
 
 The project shouldn't require many advanced datastructures as caves can be easily represented and handled in two-dimensional arrays. The focus should be to implement an algorithm to generate random map data based on specifications provided by user and grooming it over steps to make a cohesive end result.
 
-### Further specifications
+### Time complexity
 
-TBD
+Generating caves iterates over the width and height of the 2-dimensional array and results in O(n) where n = width * height.
+Further shaping the caves takes multiple iterations of looping through the array and visiting neighbours each time visiting 9 adjecant nodes. E.g. with 5 reshapes total algorithm should result in n + 5 * 9n = 46n where 46 is constant and O(n).
 
 ### Sources
 
