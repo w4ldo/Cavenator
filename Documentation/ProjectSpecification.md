@@ -8,7 +8,7 @@ The project shouldn't require many advanced datastructures as caves can be easil
 
 ### Time complexity
 
-Generating caves iterates over the width and height of the 2-dimensional array and results in O(n) where n = width * height.
+Generating caves iterates over the width and height of the 2-dimensional array and results in O(n) where n = width * height i.e. the total amount of tiles in the map.
 Further shaping the caves takes multiple iterations of looping through the array and visiting neighbours each time visiting 9 adjecant nodes. E.g. with 5 reshapes targetting 8 neighbours total algorithm should result in n + 5 * 8n = 41n where 41 is constant and O(n).
 
 ### Sources
