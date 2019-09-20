@@ -1,5 +1,6 @@
+package cavenator.domainTest;
 
-import com.mapgen.cavenator.CaveGenerator;
+import cavenator.domain.CaveGenerator;
 import static org.junit.Assert.*;
 import org.junit.Before;
 
@@ -12,13 +13,13 @@ public class CaveGeneratorTest {
 
     @Before
     public void setUp() {
-        this.map = new String[5][5];
+        this.map = new String[20][20];
         this.cavegen = new CaveGenerator(map);
     }
 
     @Test
     public void afterCaveGeneratedAllEdgesAreWalls() {
-        cavegen.generateCaves(45);
+        cavegen.generateCaves(0);
         for (int y = 0; y < map[0].length; y++) {
             assertEquals("#", map[y][0]);
         }
@@ -36,8 +37,8 @@ public class CaveGeneratorTest {
     @Test
     public void withZeroFillInnerTilesAreNotWalls() {
         cavegen.generateCaves(0);
-        for (int y = 1; y < map.length - 1; y++) {
-            for (int x = 1; x < map[y].length - 1; x++) {
+        for (int y = 5; y < map.length - 10; y++) {
+            for (int x = 5; x < map[y].length - 5; x++) {
                 assertEquals(".", map[y][x]);
             }
         }
@@ -56,29 +57,33 @@ public class CaveGeneratorTest {
     @Test
     public void surroundingWallCountIsReturnedCorrectly() {
         cavegen.generateCaves(0);
-        assertEquals(5, cavegen.surroundingWallCount(1, 1));
+        assertEquals(5, cavegen.surroundingWallCount(5, 5, 1));
         cavegen.generateCaves(100);
-        assertEquals(8, cavegen.surroundingWallCount(1, 1));
+        assertEquals(8, cavegen.surroundingWallCount(1, 1, 1));
     }
 
     @Test
     public void shapingMapAffectsWallsCorrectly() {
         cavegen.generateCaves(0);
-        cavegen.shapeMap();
-        assertEquals("#", map[1][1]);
+        assertEquals(".", map[5][5]);
+        cavegen.shapeMap(1, 4);
+        assertEquals("#", map[5][5]);
 
         cavegen.generateCaves(0);
-        cavegen.shapeMap();
-        assertEquals(".", map[1][2]);
+        assertEquals(".", map[5][6]);
+        cavegen.shapeMap(1, 4);
+        assertEquals(".", map[5][6]);
     }
 
     @Test
     public void shapingMapMultipleTimesWorksCorrectly() {
+        this.map = new String[17][17];
+        this.cavegen = new CaveGenerator(map);
         cavegen.generateCaves(0);
-        assertEquals(".", map[1][2]);
-        cavegen.shapeMap();
-        assertEquals(".", map[1][2]);
-        cavegen.shapeMap();
-        assertEquals("#", map[1][2]);
+        assertEquals(".", map[5][6]);
+        cavegen.shapeMap(1, 4);
+        assertEquals(".", map[5][6]);
+        cavegen.shapeMap(1, 4);
+        assertEquals("#", map[5][6]);
     }
 }

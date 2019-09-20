@@ -1,9 +1,9 @@
-package com.mapgen.cavenator;
+package cavenator.ui;
 
 /**
  * UI class
  */
-public class UI {
+public class ConsoleUI {
 
     /**
      * Print given map

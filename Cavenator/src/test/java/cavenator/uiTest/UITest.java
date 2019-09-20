@@ -1,4 +1,6 @@
-import com.mapgen.cavenator.UI;
+package cavenator.uiTest;
+
+import cavenator.ui.ConsoleUI;
 import static org.junit.Assert.*;
 import org.junit.Before;
 
@@ -10,7 +12,7 @@ public class UITest {
 
     @Before
     public void setUp() {
-        UI ui = new UI();
+        ConsoleUI ui = new ConsoleUI();
     }
 
     @Test
