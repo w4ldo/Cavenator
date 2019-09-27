@@ -19,7 +19,6 @@ public class GUI extends javax.swing.JFrame {
      */
     public GUI(CaveGenerator cavegen) {
         initComponents();
-        this.setLocation(200, 100);
         this.cavegen = cavegen;
     }
 
@@ -34,7 +33,7 @@ public class GUI extends javax.swing.JFrame {
         for (int y = 0; y < map.length; y++) {
             for (int x = 0; x < map[y].length; x++) {
                 if (map[y][x] == "#") {
-                    g.setColor(Color.BLACK);
+                    g.setColor(new Color(60,63,95));
                     g.fillRect(2 * x, 2 * y, 2, 2);
                 } else {
                     g.setColor(Color.WHITE);
@@ -56,21 +55,31 @@ public class GUI extends javax.swing.JFrame {
 
         cavePanel1 = new javax.swing.JPanel();
         buttonBackground = new javax.swing.JPanel();
-        generateButton = new javax.swing.JButton();
+        generateRandomButton = new javax.swing.JButton();
         shapeButton = new javax.swing.JButton();
         detailButton = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        shapingLabel = new javax.swing.JLabel();
+        generateCustomButton = new javax.swing.JButton();
+        customSeedField = new javax.swing.JTextField();
+        fillSlider = new javax.swing.JSlider();
+        seedLabel = new javax.swing.JLabel();
+        fillLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Cavenator");
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setLocation(new java.awt.Point(200, 100));
+        setResizable(false);
 
         cavePanel1.setBackground(new java.awt.Color(60, 63, 95));
+        cavePanel1.setName(""); // NOI18N
         cavePanel1.setPreferredSize(new java.awt.Dimension(600, 400));
 
         javax.swing.GroupLayout cavePanel1Layout = new javax.swing.GroupLayout(cavePanel1);
         cavePanel1.setLayout(cavePanel1Layout);
         cavePanel1Layout.setHorizontalGroup(
             cavePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         cavePanel1Layout.setVerticalGroup(
             cavePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -79,10 +88,11 @@ public class GUI extends javax.swing.JFrame {
 
         buttonBackground.setBackground(new java.awt.Color(153, 153, 153));
 
-        generateButton.setText("Generate");
-        generateButton.addActionListener(new java.awt.event.ActionListener() {
+        generateRandomButton.setText("Generate random");
+        generateRandomButton.setToolTipText("Generate random cave");
+        generateRandomButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                generateButtonActionPerformed(evt);
+                generateRandomButtonActionPerformed(evt);
             }
         });
 
@@ -100,33 +110,103 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Try shaping and detailing in different order");
+        shapingLabel.setText("Try shaping and detailing in different order");
+
+        generateCustomButton.setText("Generate custom");
+        generateCustomButton.setToolTipText("Generate cave from custom seed");
+        generateCustomButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                generateCustomButtonActionPerformed(evt);
+            }
+        });
+
+        customSeedField.setBackground(new java.awt.Color(204, 204, 204));
+        customSeedField.setToolTipText("Type custom seed here");
+        customSeedField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                customSeedFieldActionPerformed(evt);
+            }
+        });
+
+        fillSlider.setBackground(new java.awt.Color(155, 155, 155));
+        fillSlider.setForeground(new java.awt.Color(0, 0, 0));
+        fillSlider.setMajorTickSpacing(20);
+        fillSlider.setMinorTickSpacing(1);
+        fillSlider.setPaintLabels(true);
+        fillSlider.setSnapToTicks(true);
+        fillSlider.setToolTipText("Cave fill%");
+        fillSlider.setValue(45);
+        fillSlider.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                fillSliderStateChanged(evt);
+            }
+        });
+
+        seedLabel.setText("Custom seed");
+
+        fillLabel.setText("Fill: 45%");
 
         javax.swing.GroupLayout buttonBackgroundLayout = new javax.swing.GroupLayout(buttonBackground);
         buttonBackground.setLayout(buttonBackgroundLayout);
         buttonBackgroundLayout.setHorizontalGroup(
             buttonBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(buttonBackgroundLayout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(generateButton)
-                .addGap(18, 18, 18)
+                .addGroup(buttonBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(buttonBackgroundLayout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(fillSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(buttonBackgroundLayout.createSequentialGroup()
+                        .addGap(81, 81, 81)
+                        .addComponent(fillLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(buttonBackgroundLayout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addComponent(generateRandomButton)))
+                .addGroup(buttonBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(buttonBackgroundLayout.createSequentialGroup()
+                        .addGap(88, 88, 88)
+                        .addComponent(customSeedField, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(91, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, buttonBackgroundLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(buttonBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(generateCustomButton)
+                            .addGroup(buttonBackgroundLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(seedLabel)))
+                        .addGap(165, 165, 165))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, buttonBackgroundLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(shapeButton)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(detailButton)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel1)
+                .addGap(258, 258, 258))
+            .addGroup(buttonBackgroundLayout.createSequentialGroup()
+                .addGap(151, 151, 151)
+                .addComponent(shapingLabel)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         buttonBackgroundLayout.setVerticalGroup(
             buttonBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(buttonBackgroundLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addGap(18, 18, 18)
+                .addGroup(buttonBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(generateRandomButton)
+                    .addComponent(generateCustomButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(buttonBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(fillLabel)
+                    .addComponent(seedLabel))
+                .addGap(5, 5, 5)
+                .addGroup(buttonBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(customSeedField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fillSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(buttonBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(shapeButton)
-                    .addComponent(generateButton)
-                    .addComponent(detailButton)
-                    .addComponent(jLabel1))
-                .addContainerGap(21, Short.MAX_VALUE))
+                    .addComponent(detailButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(shapingLabel)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -136,9 +216,9 @@ public class GUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cavePanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(buttonBackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(11, Short.MAX_VALUE))
+                    .addComponent(buttonBackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cavePanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -153,19 +233,15 @@ public class GUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void generateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateButtonActionPerformed
-        cavegen.generateCaves(45);
+    private void customSeedFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customSeedFieldActionPerformed
+        cavegen.generateCaves(fillSlider.getValue(), customSeedField.getText());
         setCaveContent(cavegen.getMap());
-    }//GEN-LAST:event_generateButtonActionPerformed
+    }//GEN-LAST:event_customSeedFieldActionPerformed
 
-    private void shapeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shapeButtonActionPerformed
-        try {
-            cavegen.shapeMap(2, 12);
-            setCaveContent(cavegen.getMap());
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "First generate a map", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_shapeButtonActionPerformed
+    private void generateCustomButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateCustomButtonActionPerformed
+        cavegen.generateCaves(fillSlider.getValue(), customSeedField.getText());
+        setCaveContent(cavegen.getMap());
+    }//GEN-LAST:event_generateCustomButtonActionPerformed
 
     private void detailButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detailButtonActionPerformed
         try {
@@ -176,13 +252,36 @@ public class GUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_detailButtonActionPerformed
 
+    private void shapeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shapeButtonActionPerformed
+        try {
+            cavegen.shapeMap(2, 12);
+            setCaveContent(cavegen.getMap());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "First generate a map", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_shapeButtonActionPerformed
+
+    private void generateRandomButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateRandomButtonActionPerformed
+        cavegen.generateCaves(fillSlider.getValue());
+        setCaveContent(cavegen.getMap());
+    }//GEN-LAST:event_generateRandomButtonActionPerformed
+
+    private void fillSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_fillSliderStateChanged
+        fillLabel.setText("Fill: " + fillSlider.getValue() + "%");
+    }//GEN-LAST:event_fillSliderStateChanged
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel buttonBackground;
     private javax.swing.JPanel cavePanel1;
+    private javax.swing.JTextField customSeedField;
     private javax.swing.JButton detailButton;
-    private javax.swing.JButton generateButton;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel fillLabel;
+    private javax.swing.JSlider fillSlider;
+    private javax.swing.JButton generateCustomButton;
+    private javax.swing.JButton generateRandomButton;
+    private javax.swing.JLabel seedLabel;
     private javax.swing.JButton shapeButton;
+    private javax.swing.JLabel shapingLabel;
     // End of variables declaration//GEN-END:variables
 
 }

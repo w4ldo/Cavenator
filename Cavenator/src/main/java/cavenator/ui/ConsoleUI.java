@@ -6,7 +6,7 @@ package cavenator.ui;
 public class ConsoleUI {
 
     /**
-     * Print given map
+     * Print given map, used for debugging
      *
      * @param map
      */

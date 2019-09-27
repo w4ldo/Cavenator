@@ -9,6 +9,7 @@ import java.util.Random;
 public class CaveGenerator {
 
     private String[][] map;
+    private HashCodeGenerator hcGen;
 
     /**
      * Constructor
@@ -17,18 +18,40 @@ public class CaveGenerator {
      */
     public CaveGenerator(String[][] map) {
         this.map = map;
+        this.hcGen = new HashCodeGenerator();
     }
 
     /**
-     * Generate initial walls to map based on fill percent. Derive random seed
-     * from current time. Minimum thickness for ceiling and walls is 5 tiles and 10 tiles for floor.
+     * Derive string from current time and invoke overloaded method.
      *
-     * @param fill
+     * @param fill map fill percent
      */
     public void generateCaves(int fill) {
-        String seed = new Date().toString();
-        Random random = new Random(seed.hashCode());
+        String time = new Date().toString();
+        generateCaves(fill, time);
+    }
 
+    /**
+     * Derive random seed from parameter string and invoke overloaded method
+     *
+     * @param fill map fill percent
+     * @param string custom seed
+     */
+    public void generateCaves(int fill, String string) {
+        int seed = hcGen.generateStringHashCode(string);
+        Random random = new Random(seed);
+        generateCaves(fill, random);
+    }
+
+    /**
+     * Generate initial walls to map based on fill percent. 
+     * Minimum thickness for ceiling and walls is 5 tiles and
+     * 10 tiles for floor.
+     *
+     * @param fill map fill percent
+     * @param random randomizer
+     */
+    public void generateCaves(int fill, Random random) {
         for (int y = 0; y < map.length; y++) {
             for (int x = 0; x < map[y].length; x++) {
                 if (y < 5 || y > map.length - 11 || x < 5 || x > map[y].length - 6) {
@@ -44,14 +67,18 @@ public class CaveGenerator {
 
     /**
      * Iterate over map and rearrange walls based on set rules.
+     * 
+     * @param distance how far neighbours are checked 
+     * e.g. distance = 1 -> check adjecant 8 neighhbours, distance = 2 -> check adjecant 24 neighbours...
+     * @param wallLimit amount of neighbour walls that determines whether iterated tile will be wall or not
      */
-    public void shapeMap(int distance, int walls) {
+    public void shapeMap(int distance, int wallLimit) {
         for (int y = 0; y < map.length; y++) {
             for (int x = 0; x < map[y].length; x++) {
                 int surroundingWalls = surroundingWallCount(x, y, distance);
-                if (surroundingWalls > walls) {
+                if (surroundingWalls > wallLimit) {
                     map[y][x] = "#";
-                } else if (surroundingWalls < walls) {
+                } else if (surroundingWalls < wallLimit) {
                     map[y][x] = ".";
                 }
             }
