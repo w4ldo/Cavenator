@@ -21,14 +21,15 @@ public class Main {
         GUI gui = new GUI(cavegen);
         gui.setVisible(true);
 
-        String[][] map2 = new String[17][17];
-        CaveGenerator cavegen2 = new CaveGenerator(map2);
-        cavegen2.generateCaves(0);
-        consoleUi.printMap(map2);
-        cavegen2.shapeMap(1, 4);
-        consoleUi.printMap(map2);
-        cavegen2.shapeMap(1, 4);
-        consoleUi.printMap(map2);
+// Manual testing with small map size
+//        String[][] map2 = new String[17][17];
+//        CaveGenerator cavegen2 = new CaveGenerator(map2);
+//        cavegen2.generateCaves(0);
+//        consoleUi.printMap(map2);
+//        cavegen2.shapeMap(1, 4);
+//        consoleUi.printMap(map2);
+//        cavegen2.shapeMap(1, 4);
+//        consoleUi.printMap(map2);
     }
 
 }

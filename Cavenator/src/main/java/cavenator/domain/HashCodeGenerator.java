@@ -14,7 +14,7 @@ public class HashCodeGenerator {
      *
      * @param string
      */
-    public int generateStringHashCode(String string) {
+    public static int generateStringHashCode(String string) {
         int hc = 0;
         for (int i = 0; i < string.length(); i++) {
             int a = string.codePointAt(i) * (int) Math.pow(31, string.length() - (i + 1));

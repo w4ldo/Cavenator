@@ -63,15 +63,54 @@ public class CaveGeneratorTest {
     }
 
     @Test
-    public void shapingMapAffectsWallsCorrectly() {
+    public void shapingMapAAffectsWallsCorrectly() {
         cavegen.generateCaves(0);
         assertEquals(".", map[5][5]);
-        cavegen.shapeMap(1, 4);
+        cavegen.shapeMapA(1, 4);
         assertEquals("#", map[5][5]);
 
         cavegen.generateCaves(0);
         assertEquals(".", map[5][6]);
-        cavegen.shapeMap(1, 4);
+        cavegen.shapeMapA(1, 4);
+        assertEquals(".", map[5][6]);
+    }
+    
+    @Test
+    public void shapingMapBAffectsWallsCorrectly() {
+        cavegen.generateCaves(0);
+        assertEquals(".", map[5][5]);
+        cavegen.shapeMapB(1, 4);
+        assertEquals("#", map[5][5]);
+
+        cavegen.generateCaves(0);
+        assertEquals(".", map[5][6]);
+        cavegen.shapeMapB(1, 4);
+        assertEquals(".", map[5][6]);
+    }
+    
+    @Test
+    public void shapingMapCAffectsWallsCorrectly() {
+        cavegen.generateCaves(0);
+        assertEquals(".", map[5][5]);
+        cavegen.shapeMapC(1, 4);
+        assertEquals("#", map[5][5]);
+
+        cavegen.generateCaves(0);
+        assertEquals(".", map[5][6]);
+        cavegen.shapeMapC(1, 4);
+        assertEquals(".", map[5][6]);
+    }
+    
+    @Test
+    public void shapingMapDAffectsWallsCorrectly() {
+        cavegen.generateCaves(0);
+        assertEquals(".", map[5][5]);
+        cavegen.shapeMapD(1, 4);
+        assertEquals("#", map[5][5]);
+
+        cavegen.generateCaves(0);
+        assertEquals(".", map[5][6]);
+        cavegen.shapeMapD(1, 4);
         assertEquals(".", map[5][6]);
     }
 
@@ -81,9 +120,9 @@ public class CaveGeneratorTest {
         this.cavegen = new CaveGenerator(map);
         cavegen.generateCaves(0);
         assertEquals(".", map[5][6]);
-        cavegen.shapeMap(1, 4);
+        cavegen.shapeMapA(1, 4);
         assertEquals(".", map[5][6]);
-        cavegen.shapeMap(1, 4);
+        cavegen.shapeMapA(1, 4);
         assertEquals("#", map[5][6]);
     }
 }
