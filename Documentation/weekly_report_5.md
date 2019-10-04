@@ -7,6 +7,7 @@
 * Implemented additional ways to iterate over the map when shaping
   * The order of iterating greatly affects the outcome of the shaping
 * Delivered a peer review
+* Made adjustments based on suggestions in received peer review
 * Adjusted GUI
 * Worked on documentation
   * Implementation and testing documents.
