@@ -28,7 +28,9 @@ The application was tested with following inputs and results:
 
     ShapeCave: 206ms
     Total: 229ms
-  
+
+##
+
 ### 10000x10000(n=100000000)
 
     GenerateCave: 1400ms
