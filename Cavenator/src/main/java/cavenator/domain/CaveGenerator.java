@@ -20,7 +20,7 @@ public class CaveGenerator {
      * @param fill map fill percent
      */
     public void generateCaves(int fill) {
-        String time = new Date().toString();
+        String time = String.valueOf(System.currentTimeMillis());
         generateCaves(fill, time);
     }
 
@@ -32,8 +32,8 @@ public class CaveGenerator {
      */
     public void generateCaves(int fill, String string) {
         int seed = HashCodeGenerator.generateStringHashCode(string);
-        Random random = new Random(seed);
-        generateCaves(fill, random);
+        RandomNumberGenerator rng = new RandomNumberGenerator(seed);
+        generateCaves(fill, rng);
     }
 
     /**
@@ -41,14 +41,14 @@ public class CaveGenerator {
      * for ceiling and walls is 5 tiles and 10 tiles for floor.
      *
      * @param fill map fill percent
-     * @param random randomizer
+     * @param rng randomizer
      */
-    public void generateCaves(int fill, Random random) {
+    private void generateCaves(int fill, RandomNumberGenerator rng) {
         for (int y = 0; y < map.length; y++) {
             for (int x = 0; x < map[y].length; x++) {
                 if (y < 5 || y > map.length - 11 || x < 5 || x > map[y].length - 6) {
                     map[y][x] = "#";
-                } else if (random.nextInt(100) < fill) {
+                } else if (rng.nextInt(100) < fill) {
                     map[y][x] = "#";
                 } else {
                     map[y][x] = ".";

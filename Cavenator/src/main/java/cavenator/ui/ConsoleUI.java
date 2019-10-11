@@ -1,7 +1,7 @@
 package cavenator.ui;
 
 /**
- * UI class
+ * Class used for manual console testing of the application
  */
 public class ConsoleUI {
 
