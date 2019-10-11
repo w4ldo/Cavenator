@@ -14,17 +14,17 @@ The application was tested with following inputs and results:
 
     GenerateCave: 24ms
 
-#### Shape checking 9 neighbours
+Shape checking 9 neighbours
    
     ShapeCave: 50ms
     Total: 74ms
 
-#### Shape checking 24 neighbours
+Shape checking 24 neighbours
 
     ShapeCave: 125ms
     Total: 148ms
 
-#### Shape checking 48 neighbours
+Shape checking 48 neighbours
 
     ShapeCave: 206ms
     Total: 229ms
@@ -35,17 +35,17 @@ The application was tested with following inputs and results:
 
     GenerateCave: 1400ms
     
-#### Shape checking 9 neighbours
+Shape checking 9 neighbours
 
     ShapeCave: 3539ms
     Total: 4985ms
 
-#### Shape checking 24 neighbours
+Shape checking 24 neighbours
 
     ShapeCave: 10146ms
     Total: 11667ms
 
-#### Shape checking 48 neighbours
+Shape checking 48 neighbours
 
     ShapeCave: 17795ms
     Total: 19195ms
