@@ -1,6 +1,6 @@
 ## Implementation
 
-The project is a small desktop application. Technologies used are Java, Maven and Swing. Running the project opens a simple graphical user interface from which the user can interact with the application. The user can create a randomized map and shape it using customizable algorithms based on cellular automata.
+The project is a small desktop application. Technologies used are Java, Maven and Swing. Running the project opens a simple graphical user interface from which the user can interact with the application. The user can create a randomized map and shape it using customizable algorithms based on cellular automata. The implemented GUI uses 600x400 cavas that is populated with 300x200 int array.
 
 ### Implementation of algorithms
 
