@@ -5,6 +5,10 @@
  */
 package cavenator.domain;
 
+/**
+ *
+ * @author Matias
+ */
 public class HashCodeGenerator {
 
     /**
@@ -13,6 +17,7 @@ public class HashCodeGenerator {
      * (diminishing)
      *
      * @param string
+     * @return 
      */
     public static int generateStringHashCode(String string) {
         int hc = 0;

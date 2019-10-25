@@ -5,6 +5,10 @@
  */
 package cavenator.domain;
 
+/**
+ *
+ * @author Matias
+ */
 public class RandomNumberGenerator {
 
     /**
@@ -12,6 +16,10 @@ public class RandomNumberGenerator {
      */
     private long seed;
 
+    /**
+     *
+     * @param seed
+     */
     public RandomNumberGenerator(long seed) {
         setSeed(seed);
     }
@@ -43,6 +51,8 @@ public class RandomNumberGenerator {
     /**
      * Generates the next pseudorandom number. This returns a value between
      * 0(inclusive) and n(exclusive), and each value has the same likelihood
+     * @param n
+     * @return 
      */
     public int nextInt(int n) {
         if (n <= 0) {
