@@ -18,6 +18,8 @@ Cave generator for roguelikes based on cellular automata.
 
 ##### [Project testing](https://github.com/w4ldo/Cavenator/blob/master/Documentation/ProjectTesting.md)
 
+##### [Manual](https://github.com/w4ldo/Cavenator/blob/master/Documentation/Manual.md)
+
 ##### Weekly reports:
 * [Week 1](https://github.com/w4ldo/Cavenator/blob/master/Documentation/weekly_report_1.md)
 * [Week 2](https://github.com/w4ldo/Cavenator/blob/master/Documentation/weekly_report_2.md)
